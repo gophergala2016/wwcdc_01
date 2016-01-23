@@ -41,9 +41,15 @@ func FindLearningResources(t string) ([]*models.LearningResource, error) {
                  gophergala_learning_resource_languages lrl
             where l.id = lrl.language_id and lrl.learning_resource_id = $1`
 	for _, x := range ret {
-		err = tx.Select(x.Languages, query, x.ID)
+		err = tx.Select(&(x.Languages), query, x.ID)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 	log.Println("after second query:", ret)
+	for _, x := range ret {
+		fmt.Println(*x)
+	}
 	tx.Commit()
 	return ret, nil
 }
