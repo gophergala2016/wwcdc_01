@@ -6,7 +6,7 @@ http://what
 
     Schemes:
       https
-    Host: massca.st
+    Host: https://mc1.massca.st:13337
     BasePath: /
     Version: 1.0.0
     License: MIT

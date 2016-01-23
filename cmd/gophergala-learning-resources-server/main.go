@@ -48,8 +48,15 @@ func main() {
 	if _, err := parser.Parse(); err != nil {
 		os.Exit(1)
 	}
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir("./public/")))
+	go func() {
+		fmt.Printf("serving static site at http://%s:12345/\n", opts.TLSHost)
+		graceful.Run(":12345", 10*time.Second, mux)
+	}()
 
 	httpsServer := &graceful.Server{Server: new(http.Server)}
+	// Normal resources
 	httpsServer.Handler = handler
 	httpsServer.TLSConfig = new(tls.Config)
 	httpsServer.TLSConfig.NextProtos = []string{"http/1.1"}
@@ -68,7 +75,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	fmt.Printf("serving gophergala learning resources at https://%s\n", tlsListener.Addr())
+   fmt.Printf("serving gophergala learning resources at https://%s:%d\n", opts.TLSHost, opts.TLSPort)
 
 	wrapped := tls.NewListener(tcpKeepAliveListener{tlsListener.(*net.TCPListener)}, httpsServer.TLSConfig)
 	if err := httpsServer.Serve(wrapped); err != nil {
