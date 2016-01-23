@@ -47,6 +47,8 @@ type GophergalaLearningResourcesAPI struct {
 	AddLearningResourceHandler AddLearningResourceHandler
 	// DeleteLearningResourceHandler sets the operation handler for the delete learning resource operation
 	DeleteLearningResourceHandler DeleteLearningResourceHandler
+	// FindLanguagesHandler sets the operation handler for the find languages operation
+	FindLanguagesHandler FindLanguagesHandler
 	// FindLearningResourceByIDHandler sets the operation handler for the find learning resource by id operation
 	FindLearningResourceByIDHandler FindLearningResourceByIDHandler
 	// FindLearningResourcesHandler sets the operation handler for the find learning resources operation
@@ -112,6 +114,10 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 
 	if o.DeleteLearningResourceHandler == nil {
 		unregistered = append(unregistered, "DeleteLearningResourceHandler")
+	}
+
+	if o.FindLanguagesHandler == nil {
+		unregistered = append(unregistered, "FindLanguagesHandler")
 	}
 
 	if o.FindLearningResourceByIDHandler == nil {
@@ -204,6 +210,11 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 		o.handlers[strings.ToUpper("DELETE")] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/learning-resources/{id}"] = NewDeleteLearningResource(o.context, o.DeleteLearningResourceHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/languages"] = NewFindLanguages(o.context, o.FindLanguagesHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)

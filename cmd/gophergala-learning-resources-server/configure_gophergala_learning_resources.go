@@ -42,6 +42,13 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		}
 		return operations.NewDeleteLearningResourceNoContent()
 	})
+	api.FindLanguagesHandler = operations.FindLanguagesHandlerFunc(func() middleware.Responder {
+		langs, err := db.FindLanguages()
+		if err != nil {
+			operations.NewFindLanguagesDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewFindLanguagesOK().WithPayload(langs)
+	})
 	api.FindLearningResourceByIDHandler = operations.FindLearningResourceByIDHandlerFunc(func(params operations.FindLearningResourceByIDParams) middleware.Responder {
 		learningResource, err := db.FindLearningResourceByID(params.ID)
 		if err != nil {

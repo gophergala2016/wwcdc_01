@@ -24,6 +24,32 @@
     "application/json"
   ],
   "paths": {
+    "/languages": {
+      "get": {
+        "description": "Returns all languages",
+        "operationId": "findLanguages",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "languages response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
     "/learning-resources": {
       "get": {
         "description": "Returns all learning resources",
