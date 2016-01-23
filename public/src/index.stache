@@ -12,15 +12,37 @@
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <h1 class="page-header text-center">
-            {{ message }}
+            Learn to Program!
           </h1>
-         <can-import from="gophergala/pages/home/">
-            {{#if isPending}}
-              Loading...
-            {{else}}
-              <pages-home/>
-            {{/if}}
-          </can-import>
+          <ul class="nav nav-pills">
+            <li role="presentation" class="{{#eq page 'home'}}active{{/eq}}">
+              <a href="{{routeUrl page='home' }}">Home</a>
+            </li>
+            <li role="presentation" class="{{#eq page 'add-to-list'}}active{{/eq}}">
+              <a href="{{routeUrl page='add-to-list' }}">Add to list</a>
+            </li>
+          </ul>
+          {{#switch page}}
+            {{#case "add-to-list"}}
+              <can-import from="gophergala/pages/add-to-list/">
+                {{#if isPending}}
+                  Loading...
+                {{else}}
+                  <pages-add-to-list/>
+                {{/if}}
+              </can-import>
+            {{/case}}
+            {{#default}}
+             <can-import from="gophergala/pages/home/">
+                {{#if isPending}}
+                  Loading...
+                {{else}}
+                  <pages-home/>
+                {{/if}}
+              </can-import>
+            {{/default}}
+          {{/switch}}
+
         </div>
       </div>
     </div>

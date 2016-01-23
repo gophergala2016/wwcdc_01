@@ -1,4 +1,3 @@
-<h1>Add a new resource!</h1>
 <form ($submit)="send(%event)">
   <div class="form-group">
     <label for="name">Resource Name</label>
