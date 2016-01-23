@@ -3,6 +3,7 @@ import Map from 'can/map/';
 import 'can/map/define/';
 import './resources-list.less!';
 import template from './resources-list.stache!';
+import LearningResources from 'gophergala/models/learning-resources';
 
 export const ViewModel = Map.extend({
   define: {

@@ -1,1 +1,3 @@
+<can-import from="gophergala/components/resources-list/"/>
 <p>{{message}}</p>
+<resources-list/>
