@@ -4,7 +4,20 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 
 export const LearningResources = can.Map.extend({
-  define: {}
+  define: {
+    name: {
+      type: 'string'
+    },
+    url: {
+      type: 'string'
+    },
+    type: {
+      type: 'string'
+    },
+    languages: {
+      value: []
+    }
+  }
 });
 
 LearningResources.List = can.List.extend({
