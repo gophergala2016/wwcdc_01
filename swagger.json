@@ -34,7 +34,7 @@
         "parameters": [{
           "name": "types",
           "in": "query",
-          "description": "learning resource types to filter by, eg. 'online', 'other'",
+          "description": "learning resource types to filter by, eg. 'online', 'open-source', 'virtual-mentor'",
           "required": false,
           "type": "array",
           "items": {

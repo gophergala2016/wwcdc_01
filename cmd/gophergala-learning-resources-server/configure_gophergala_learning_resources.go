@@ -18,7 +18,7 @@ func addLearningResource(lr *models.LearningResource) error {
 	if lr == nil {
 		return errors.New(500, "lr must be present")
 	}
-   return db.CreateLearningResource(lr)
+	return db.CreateLearningResource(lr)
 }
 
 func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
@@ -39,10 +39,29 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		return middleware.NotImplemented("operation .DeleteLearningResource has not yet been implemented")
 	})
 	api.FindLearningResourceByIDHandler = operations.FindLearningResourceByIDHandlerFunc(func(params operations.FindLearningResourceByIDParams) middleware.Responder {
-		return middleware.NotImplemented("operation .FindLearningResourceByID has not yet been implemented")
+		learningResource, err := db.FindLearningResourceByID(params.ID)
+		if err != nil {
+			return operations.NewFindLearningResourceByIDDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewFindLearningResourceByIDOK().WithPayload(learningResource)
 	})
 	api.FindLearningResourcesHandler = operations.FindLearningResourcesHandlerFunc(func(params operations.FindLearningResourcesParams) middleware.Responder {
-		return middleware.NotImplemented("operation .FindLearningResources has not yet been implemented")
+		learningResources := []*models.LearningResource{}
+      var err error
+		if len(params.Types) == 0 {
+			learningResources, err = db.FindLearningResources("all")
+			if err != nil {
+				return operations.NewFindLearningResourcesDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+			}
+		}
+		for _, t := range params.Types {
+			lr, err := db.FindLearningResources(t)
+			if err != nil {
+				return operations.NewFindLearningResourcesDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+			}
+			learningResources = append(learningResources, lr...)
+		}
+		return operations.NewFindLearningResourcesOK().WithPayload(learningResources)
 	})
 
 	api.ServerShutdown = func() {}
@@ -60,6 +79,5 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-  return handler
+	return handler
 }
-
