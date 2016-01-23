@@ -12,7 +12,7 @@
       "name": "MIT"
     }
   },
-  "host": "https://mc1.massca.st:13337",
+  "host": "mc1.massca.st:13337",
   "basePath": "/api",
   "schemes": [
     "https"
