@@ -1,12 +1,12 @@
 # learning resources
 api docs: 
-https://mc1.massca.st:13337/docs/#/default
+https://boolmeover.com/docs/#/default
       
 website: 
-https://mc1.massca.st:13337/ 
+https://boolmeover.com/ 
   
 api base url:
-https://mc1.massca.st:13337/api/
+https://boolmeover.com/api/
  
    
  
