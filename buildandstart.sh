@@ -1,2 +1,4 @@
 #!/bin/bash
-./installserver.sh && ./startserver.sh
+killall gophergala-learning-resources-server 
+echo "$$" > service.pid
+./installserver.sh && ./startserver.sh &

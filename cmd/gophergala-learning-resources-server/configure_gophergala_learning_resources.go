@@ -7,6 +7,7 @@ import (
 	"github.com/go-swagger/go-swagger/httpkit"
 	"github.com/go-swagger/go-swagger/httpkit/middleware"
 
+	"github.com/gophergala2016/wwcdc_01/db"
 	"github.com/gophergala2016/wwcdc_01/models"
 	"github.com/gophergala2016/wwcdc_01/restapi/operations"
 )
@@ -17,8 +18,7 @@ func addLearningResource(lr *models.LearningResource) error {
 	if lr == nil {
 		return errors.New(500, "lr must be present")
 	}
-
-	return nil
+   return db.CreateLearningResource(lr)
 }
 
 func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
