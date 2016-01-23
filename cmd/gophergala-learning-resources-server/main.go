@@ -87,11 +87,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	fmt.Printf("serving gophergala learning resources at https://%s:%d\n", opts.TLSHost, opts.TLSPort)
+	log.Printf("serving gophergala learning resources at https://%s:%d\n", opts.TLSHost, opts.TLSPort)
 
 	wrapped := tls.NewListener(tcpKeepAliveListener{tlsListener.(*net.TCPListener)}, httpsServer.TLSConfig)
 	if err := httpsServer.Serve(wrapped); err != nil {
 		api.ServerShutdown()
+		log.Printf("shutting down gophergala learning resources at https://%s:%d\n", opts.TLSHost, opts.TLSPort)
 		log.Fatalln(err)
 	}
 	go func() {
