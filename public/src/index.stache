@@ -5,10 +5,20 @@
     {{asset "html5shiv"}}
   </head>
   <body>
+    <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="gophergala/styles.less!" />
     <can-import from="gophergala/app" export-as="viewModel" />
 
-    <h1>{{message}}</h1>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h1 class="page-header text-center">
+            {{ message }}
+          </h1>
+        </div>
+      </div>
+    </div>
 
     {{asset "inline-cache"}}
 
