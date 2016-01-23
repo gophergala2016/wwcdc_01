@@ -5,5 +5,5 @@ if [ $x -eq "1" ]
 then
   echo "up to date"
 else 
-  restart.sh
+  ./buildandstart.sh
 fi
