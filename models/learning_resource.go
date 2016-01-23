@@ -21,6 +21,7 @@ type LearningResource struct {
 	/* ID id
 
 	Required: true
+	Read Only: true
 	*/
 	ID int64 `json:"id,omitempty"`
 
