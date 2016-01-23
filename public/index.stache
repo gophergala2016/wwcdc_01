@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{asset "css"}}
+    {{asset "html5shiv"}}
+  </head>
+  <body>
+    <can-import from="bootstrap/less/bootstrap.less!" />
+    <can-import from="gophergala/styles.less!" />
+    <can-import from="gophergala/app" export-as="viewModel" />
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h1 class="page-header text-center">
+            {{ message }}
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    {{asset "inline-cache"}}
+
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="gophergala/index.stache!done-autorender"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>
