@@ -8,14 +8,19 @@
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="gophergala/styles.less!" />
     <can-import from="gophergala/app" export-as="viewModel" />
-
-    
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <h1 class="page-header text-center">
             {{ message }}
           </h1>
+         <can-import from="gophergala/pages/home/">
+            {{#if isPending}}
+              Loading...
+            {{else}}
+              <pages-home/>
+            {{/if}}
+          </can-import>
         </div>
       </div>
     </div>

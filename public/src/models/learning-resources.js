@@ -3,22 +3,22 @@ import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 
-export const Learning-resources = can.Map.extend({
+export const LearningResources = can.Map.extend({
   define: {}
 });
 
-Learning-resources.List = can.List.extend({
-  Map: Learning-resources
+LearningResources.List = can.List.extend({
+  Map: LearningResources
 }, {});
 
-export const learning-resourcesConnection = superMap({
+export const learningResourcesConnection = superMap({
   url: '/api/learning-resources',
   idProp: 'id',
-  Map: Learning-resources,
-  List: Learning-resources.List,
+  Map: LearningResources,
+  List: LearningResources.List,
   name: 'learning-resources'
 });
 
-tag('learning-resources-model', learning-resourcesConnection);
+tag('learning-resources-model', learningResourcesConnection);
 
-export default Learning-resources;
+export default LearningResources;
