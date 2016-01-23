@@ -3,7 +3,9 @@ import route from "can/route/";
 import 'can/map/define/';
 import 'can/route/pushstate/';
 
-// import 'gophergala/models/fixtures/';
+//!steal-remove-start
+import 'gophergala/models/fixtures/';
+//!steal-remove-end
 
 const AppViewModel = AppMap.extend({
   define: {
@@ -17,5 +19,7 @@ const AppViewModel = AppMap.extend({
     }
   }
 });
+
+route('/:page', { page: 'home' })
 
 export default AppViewModel;

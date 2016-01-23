@@ -1,0 +1,3 @@
+<can-import from="gophergala/components/add-resource/"/>
+<h2>Add a new resource!</h2>
+<add-resource/>

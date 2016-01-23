@@ -1,5 +1,4 @@
 <can-import from="gophergala/components/resources-list/"/>
-<can-import from="gophergala/components/add-resource/"/>
-<p>{{message}}</p>
+<h2>Browse learning resources!</h2>
 <resources-list/>
-<add-resource/>
+
