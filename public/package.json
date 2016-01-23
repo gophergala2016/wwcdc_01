@@ -1,0 +1,61 @@
+{
+  "name": "gophergala",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "scripts": {
+    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "start": "can-serve --port 8080",
+    "develop": "can-serve --develop --port 8080",
+    "document": "documentjs",
+    "build": "node build"
+  },
+  "main": "gophergala/index.stache!done-autorender",
+  "files": [
+    "src"
+  ],
+  "keywords": [],
+  "system": {
+    "main": "gophergala/index.stache!done-autorender",
+    "directories": {
+      "lib": "src"
+    },
+    "configDependencies": [
+      "live-reload"
+    ],
+    "npmIgnore": [
+      "documentjs",
+      "testee",
+      "donejs-deploy",
+      "generator-donejs",
+      "donejs-cli"
+    ]
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "can": "^2.3.0",
+    "can-connect": "^0.3.0",
+    "can-ssr": "^0.11.0",
+    "done-autorender": "^0.6.0",
+    "done-component": "^0.4.0",
+    "done-css": "~1.1.13",
+    "generator-donejs": "^0.4.3",
+    "jquery": "2.1.4",
+    "steal": "^0.13.0"
+  },
+  "devDependencies": {
+    "documentjs": "^0.4.1",
+    "donejs-deploy": "^0.4.0",
+    "funcunit": "~3.0.0",
+    "steal-qunit": "^0.1.1",
+    "steal-tools": "^0.13.0",
+    "testee": "^0.2.4",
+    "donejs-cli": "^0.6.0",
+    "can-fixture": "^0.1.0"
+  }
+}
