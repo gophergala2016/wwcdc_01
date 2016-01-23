@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-swagger/go-swagger/httpkit"
 
-	"github.com/freeeve/gophergala/models"
+	"github.com/gophergala2016/wwcdc_01/models"
 )
 
 /*FindLearningResourceByIDOK learning resource response

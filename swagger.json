@@ -72,7 +72,7 @@
           "description": "LearningResource to add to the store",
           "required": true,
           "schema": {
-            "$ref": "#/definitions/LearningResourceInput"
+            "$ref": "#/definitions/LearningResource"
           }
         }],
         "responses": {
@@ -151,7 +151,9 @@
       "type": "object",
       "required": [
         "id",
-        "name"
+        "name",
+        "url",
+        "type"
       ],
       "properties": {
         "id": {
@@ -174,22 +176,6 @@
           }
         }
       }
-    },
-    "LearningResourceInput": {
-      "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/LearningResource"
-        }, {
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      }]
     },
     "ErrorModel": {
       "type": "object",

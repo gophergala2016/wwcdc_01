@@ -35,12 +35,16 @@ type LearningResource struct {
 	Name string `json:"name,omitempty"`
 
 	/* Type type
-	 */
-	Type *string `json:"type,omitempty"`
+
+	Required: true
+	*/
+	Type string `json:"type,omitempty"`
 
 	/* URL url
-	 */
-	URL *string `json:"url,omitempty"`
+
+	Required: true
+	*/
+	URL string `json:"url,omitempty"`
 }
 
 // Validate validates this learning resource
@@ -58,6 +62,16 @@ func (m *LearningResource) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateURL(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -97,6 +111,24 @@ func (m *LearningResource) validateLanguages(formats strfmt.Registry) error {
 func (m *LearningResource) validateName(formats strfmt.Registry) error {
 
 	if err := validate.RequiredString("name", "body", string(m.Name)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *LearningResource) validateType(formats strfmt.Registry) error {
+
+	if err := validate.RequiredString("type", "body", string(m.Type)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *LearningResource) validateURL(formats strfmt.Registry) error {
+
+	if err := validate.RequiredString("url", "body", string(m.URL)); err != nil {
 		return err
 	}
 

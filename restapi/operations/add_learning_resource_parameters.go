@@ -9,7 +9,7 @@ import (
 	"github.com/go-swagger/go-swagger/errors"
 	"github.com/go-swagger/go-swagger/httpkit/middleware"
 
-	"github.com/freeeve/gophergala/models"
+	"github.com/gophergala2016/wwcdc_01/models"
 )
 
 // NewAddLearningResourceParams creates a new AddLearningResourceParams object
@@ -28,7 +28,7 @@ type AddLearningResourceParams struct {
 	  Required: true
 	  In: body
 	*/
-	LearningResource models.LearningResourceInput
+	LearningResource *models.LearningResource
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -36,7 +36,7 @@ type AddLearningResourceParams struct {
 func (o *AddLearningResourceParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
-	var body models.LearningResourceInput
+	var body models.LearningResource
 	if err := route.Consumer.Consume(r.Body, &body); err != nil {
 		res = append(res, errors.NewParseError("learningResource", "body", "", err))
 	} else {
@@ -45,7 +45,7 @@ func (o *AddLearningResourceParams) BindRequest(r *http.Request, route *middlewa
 		}
 
 		if len(res) == 0 {
-			o.LearningResource = body
+			o.LearningResource = &body
 		}
 	}
 

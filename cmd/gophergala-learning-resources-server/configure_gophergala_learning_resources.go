@@ -7,10 +7,19 @@ import (
 	"github.com/go-swagger/go-swagger/httpkit"
 	"github.com/go-swagger/go-swagger/httpkit/middleware"
 
-	"github.com/freeeve/gophergala/restapi/operations"
+	"github.com/gophergala2016/wwcdc_01/models"
+	"github.com/gophergala2016/wwcdc_01/restapi/operations"
 )
 
 // This file is safe to edit. Once it exists it will not be overwritten
+
+func addLearningResource(lr *models.LearningResource) error {
+	if lr == nil {
+		return errors.New(500, "lr must be present")
+	}
+
+	return nil
+}
 
 func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 	// configure the api here
@@ -21,7 +30,10 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 	api.JSONProducer = httpkit.JSONProducer()
 
 	api.AddLearningResourceHandler = operations.AddLearningResourceHandlerFunc(func(params operations.AddLearningResourceParams) middleware.Responder {
-		return middleware.NotImplemented("operation .AddLearningResource has not yet been implemented")
+		if err := addLearningResource(params.LearningResource); err != nil {
+			return operations.NewAddLearningResourceDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewAddLearningResourceOK().WithPayload(params.LearningResource)
 	})
 	api.DeleteLearningResourceHandler = operations.DeleteLearningResourceHandlerFunc(func(params operations.DeleteLearningResourceParams) middleware.Responder {
 		return middleware.NotImplemented("operation .DeleteLearningResource has not yet been implemented")
@@ -48,5 +60,6 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+  return handler
 }
+
