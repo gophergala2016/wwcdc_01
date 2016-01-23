@@ -3,7 +3,7 @@ import route from "can/route/";
 import 'can/map/define/';
 import 'can/route/pushstate/';
 
-import 'gophergala/models/fixtures/';
+// import 'gophergala/models/fixtures/';
 
 const AppViewModel = AppMap.extend({
   define: {
