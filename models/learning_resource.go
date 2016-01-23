@@ -4,9 +4,12 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	"github.com/go-swagger/go-swagger/errors"
 	"github.com/go-swagger/go-swagger/httpkit/validate"
 	"github.com/go-swagger/go-swagger/strfmt"
+	"github.com/go-swagger/go-swagger/swag"
 )
 
 /*LearningResource LearningResource learning resource
@@ -23,7 +26,7 @@ type LearningResource struct {
 
 	/* Languages languages
 	 */
-	Languages *string `json:"languages,omitempty"`
+	Languages []string `json:"languages,omitempty"`
 
 	/* Name name
 
@@ -49,6 +52,11 @@ func (m *LearningResource) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLanguages(formats); err != nil {
+		// prop
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		// prop
 		res = append(res, err)
@@ -64,6 +72,23 @@ func (m *LearningResource) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", int64(m.ID)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *LearningResource) validateLanguages(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Languages) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Languages); i++ {
+
+		if err := validate.RequiredString("languages"+"."+strconv.Itoa(i), "body", string(m.Languages[i])); err != nil {
+			return err
+		}
+
 	}
 
 	return nil

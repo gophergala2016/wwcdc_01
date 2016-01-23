@@ -25,11 +25,11 @@ func NewFindLearningResourcesParams() FindLearningResourcesParams {
 //
 // swagger:parameters findLearningResources
 type FindLearningResourcesParams struct {
-	/*tags to filter by
+	/*learning resource types to filter by, eg. 'online', 'other'
 	  In: query
 	  Collection Format: csv
 	*/
-	Tags []string
+	Types []string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -38,8 +38,8 @@ func (o *FindLearningResourcesParams) BindRequest(r *http.Request, route *middle
 	var res []error
 	qs := httpkit.Values(r.URL.Query())
 
-	qTags, qhkTags, _ := qs.GetOK("tags")
-	if err := o.bindTags(qTags, qhkTags, route.Formats); err != nil {
+	qTypes, qhkTypes, _ := qs.GetOK("types")
+	if err := o.bindTypes(qTypes, qhkTypes, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -49,14 +49,14 @@ func (o *FindLearningResourcesParams) BindRequest(r *http.Request, route *middle
 	return nil
 }
 
-func (o *FindLearningResourcesParams) bindTags(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *FindLearningResourcesParams) bindTypes(rawData []string, hasKey bool, formats strfmt.Registry) error {
 
-	var qvTags string
+	var qvTypes string
 	if len(rawData) > 0 {
-		qvTags = rawData[len(rawData)-1]
+		qvTypes = rawData[len(rawData)-1]
 	}
 
-	raw := swag.SplitByFormat(qvTags, "csv")
+	raw := swag.SplitByFormat(qvTypes, "csv")
 	size := len(raw)
 
 	if size == 0 {
@@ -66,7 +66,7 @@ func (o *FindLearningResourcesParams) bindTags(rawData []string, hasKey bool, fo
 	ic := raw
 	isz := size
 	var ir []string
-	iValidateElement := func(i int, tagsI string) *errors.Validation {
+	iValidateElement := func(i int, typesI string) *errors.Validation {
 
 		return nil
 	}
@@ -79,7 +79,7 @@ func (o *FindLearningResourcesParams) bindTags(rawData []string, hasKey bool, fo
 		ir = append(ir, ic[i])
 	}
 
-	o.Tags = ir
+	o.Types = ir
 
 	return nil
 }

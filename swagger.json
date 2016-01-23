@@ -32,9 +32,9 @@
           "application/json"
         ],
         "parameters": [{
-          "name": "tags",
+          "name": "types",
           "in": "query",
-          "description": "tags to filter by",
+          "description": "learning resource types to filter by, eg. 'online', 'other'",
           "required": false,
           "type": "array",
           "items": {
@@ -168,7 +168,10 @@
           "type": "string"
         },
         "languages": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -176,7 +179,7 @@
       "type": "object",
       "allOf": [{
         "$ref": "#/definitions/LearningResource"
-      }, {
+        }, {
         "required": [
           "name"
         ],
