@@ -18,7 +18,7 @@
     "https"
   ],
   "consumes": [
-    "application/json"
+    "application/json", "application/octet-stream"
   ],
   "produces": [
     "application/json"
@@ -124,6 +124,9 @@
       "delete": {
         "description": "deletes a single learning resource based on the ID supplied",
         "operationId": "deleteLearningResource",
+        "consumes":[
+          "application/json"
+        ],
         "parameters": [{
           "name": "id",
           "in": "path",

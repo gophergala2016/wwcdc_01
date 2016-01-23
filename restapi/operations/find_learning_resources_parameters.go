@@ -25,7 +25,7 @@ func NewFindLearningResourcesParams() FindLearningResourcesParams {
 //
 // swagger:parameters findLearningResources
 type FindLearningResourcesParams struct {
-	/*learning resource types to filter by, eg. 'online', 'other'
+	/*learning resource types to filter by, eg. 'online', 'open-source', 'virtual-mentor'
 	  In: query
 	  Collection Format: csv
 	*/

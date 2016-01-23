@@ -36,7 +36,11 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		return operations.NewAddLearningResourceOK().WithPayload(params.LearningResource)
 	})
 	api.DeleteLearningResourceHandler = operations.DeleteLearningResourceHandlerFunc(func(params operations.DeleteLearningResourceParams) middleware.Responder {
-		return middleware.NotImplemented("operation .DeleteLearningResource has not yet been implemented")
+		err := db.DeleteLearningResource(params.ID)
+		if err != nil {
+			return operations.NewDeleteLearningResourceDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewDeleteLearningResourceNoContent()
 	})
 	api.FindLearningResourceByIDHandler = operations.FindLearningResourceByIDHandlerFunc(func(params operations.FindLearningResourceByIDParams) middleware.Responder {
 		learningResource, err := db.FindLearningResourceByID(params.ID)
@@ -47,7 +51,7 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 	})
 	api.FindLearningResourcesHandler = operations.FindLearningResourcesHandlerFunc(func(params operations.FindLearningResourcesParams) middleware.Responder {
 		learningResources := []*models.LearningResource{}
-      var err error
+		var err error
 		if len(params.Types) == 0 {
 			learningResources, err = db.FindLearningResources("all")
 			if err != nil {

@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 
@@ -12,7 +14,6 @@ import (
 var db = sqlx.MustConnect("pgx", "postgres://gophergala:gophergala1@localhost:5432/gophergala?sslmode=disable")
 
 func FindLearningResources(t string) ([]*models.LearningResource, error) {
-	log.Println("querying learning resources on", t)
 	query := ""
 	ret := []*models.LearningResource{}
 	tx := db.MustBegin()
@@ -34,8 +35,6 @@ func FindLearningResources(t string) ([]*models.LearningResource, error) {
 			fmt.Println(err)
 		}
 	}
-	log.Println("first query len:", len(ret), ret)
-	log.Println("starting second query set..")
 	query = `select l.name as name
             from gophergala_languages l, 
                  gophergala_learning_resource_languages lrl
@@ -45,10 +44,6 @@ func FindLearningResources(t string) ([]*models.LearningResource, error) {
 		if err != nil {
 			fmt.Println(err)
 		}
-	}
-	log.Println("after second query:", ret)
-	for _, x := range ret {
-		fmt.Println(*x)
 	}
 	tx.Commit()
 	return ret, nil
@@ -72,14 +67,42 @@ func FindLearningResourceByID(id int64) (*models.LearningResource, error) {
 }
 
 func CreateLearningResource(lr *models.LearningResource) error {
+
 	var typeId int64
 	var languageIds []int64
 	tx := db.MustBegin()
-	query := "select id from gophergala_types where name=$1;"
-	err := tx.Get(&typeId, query, lr.Type)
+	// check for existence
+	count := 0
+	query := "select count(1) from gophergala_learning_resources where name=$1"
+	err := tx.Get(&count, query, lr.Name)
 	if err != nil {
 		return err
 	}
+	if count > 0 {
+		return errors.New("duplicate name for learning resource")
+	}
+
+	query = "select id from gophergala_types where name=$1;"
+	err = tx.Get(&typeId, query, lr.Type)
+	if err != nil {
+		return err
+	}
+
+	// add languages that don't exist
+	for _, l := range lr.Languages {
+		query = "select id from gophergala_languages where name=$1"
+		var languageId int64
+		err = tx.Get(&languageId, query, l)
+		if err == sql.ErrNoRows {
+			query = "insert into gophergala_languages (name) values($1)"
+			_, err = tx.Exec(query, l)
+		}
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+	}
+
 	query = "select id from gophergala_languages where name in (?);"
 	query, args, err := sqlx.In(query, lr.Languages)
 	if err != nil {
@@ -111,4 +134,20 @@ func CreateLearningResource(lr *models.LearningResource) error {
 	}
 	err = tx.Commit()
 	return err
+}
+
+func DeleteLearningResource(id int64) error {
+	tx := db.MustBegin()
+	query := "delete from gophergala_learning_resources where id=$1"
+	_, err := tx.Exec(query, id)
+	if err != nil {
+		return err
+	}
+	query = "delete from gophergala_learning_resource_languages where learning_resource_id=$1"
+	_, err = tx.Exec(query, id)
+	if err != nil {
+		return err
+	}
+	tx.Commit()
+   return nil
 }
