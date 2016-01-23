@@ -29,6 +29,6 @@ build/Release
 
 # DoneJS
 docs/
-build/
-dist/
+# build/
+# dist/
 cache/
