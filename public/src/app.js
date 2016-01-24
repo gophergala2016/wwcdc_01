@@ -21,5 +21,6 @@ const AppViewModel = AppMap.extend({
 });
 
 route('/:page', { page: 'home' })
+route('/:page/:slug')
 
 export default AppViewModel;

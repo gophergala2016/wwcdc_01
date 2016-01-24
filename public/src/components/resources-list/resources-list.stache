@@ -3,21 +3,21 @@
 
 <learning-resources-model get-list="{}" class="list-group">
   <div class="list-group-item clearfix">
-    <div class="col-sm-2 text-center">
+   <!--  <div class="col-sm-2 text-center">
       <strong>Compare</strong>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-10"> -->
       <strong>Details</strong>
-    </div>
+    <!-- </div> -->
   </div>
   {{#each ./value}}
     <div class="list-group-item clearfix">
-      <div class="col-sm-2 text-center">
+     <!--  <div class="col-sm-2 text-center">
         <input type="checkbox" value={id}/>
       </div>
-      <div class="col-sm-10">
-        <resource-list-item resource="{.}" />
-      </div>
+      <div class="col-sm-10"> -->
+        <resource-list-item resource="{.}" can-click="changeRoute" />
+      <!-- </div> -->
     </div>
   {{else}}
     <div class="list-group-item">

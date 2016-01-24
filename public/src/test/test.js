@@ -17,3 +17,7 @@ import 'gophergala/components/reviews-list/reviews-list_test';
 import 'gophergala/components/reviews-list-item/reviews-list-item_test';
 
 import 'gophergala/components/create-review/create-review_test';
+
+import 'gophergala/pages/resource/resource_test';
+
+import 'gophergala/pages/404/404_test';

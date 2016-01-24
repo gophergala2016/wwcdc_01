@@ -4,12 +4,14 @@ import 'can/map/define/';
 import './resources-list.less!';
 import template from './resources-list.stache!';
 import LearningResources from 'gophergala/models/learning-resources';
+import route from "can/route/";
 
 export const ViewModel = Map.extend({
   define: {
-    message: {
-      value: 'This is the resources-list component'
-    }
+  },
+  changeRoute (resource, a, event) {
+    event.preventDefault();
+    route.attr({page: 'resource', slug: resource.attr('id')})
   }
 });
 
