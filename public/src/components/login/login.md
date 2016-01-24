@@ -1,8 +1,8 @@
 @parent gophergala
-@module {can.Component} gophergala/components/add-resource <add-resource>
-@signature `<add-resource>`
+@module {can.Component} gophergala/components/login <login>
+@signature `<login>`
 
 @body
 
-## <add-resource>
+## <login>
 
