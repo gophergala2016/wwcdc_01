@@ -7,9 +7,8 @@ import userLogin from 'gophergala/models/login';
 
 export const ViewModel = Map.extend({
   define:{
-    message: {
-  //    value: {},
-      value: 'This is the login component',
+    login: {
+      value: {},
       Type: userLogin
     }
   },
