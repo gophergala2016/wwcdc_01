@@ -4,7 +4,7 @@
         "version": "1.0.0",
         "title": "gophergala learning resources",
         "description": "",
-        "termsOfService": "https://boolmeover.com/tos",
+        "termsOfService": "https://boolmeover.com/tos.html",
         "contact": {
             "name": "wwcdc_01"
         },
@@ -220,6 +220,42 @@
                 }
             }
         },
+        "/learning-resources/{id}/reviews": {
+            "get": {
+                "description": "Returns reviews for a particular learning resource.",
+                "operationId": "findReviewsForLearningResource",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of learning resource to fetch reviews for",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "learning resource response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
         "/reviews": {
             "get": {
                 "description": "Returns recent reviews",
@@ -329,6 +365,40 @@
                 "responses": {
                     "204": {
                         "description": "review deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-auth": {
+            "post": {
+                "description": "Authenticates a user.",
+                "operationId": "authUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User to login",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserAuth"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success response"
+                    },
+                    "403": {
+                        "description": "fail response"
                     },
                     "default": {
                         "description": "unexpected error",
@@ -473,6 +543,21 @@
                 }
             }
         },
+        "UserAuth": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "Review": {
             "type": "object",
             "required": [
@@ -521,6 +606,10 @@
                 },
                 "description": {
                     "type": "string"
+                },
+                "review_date": {
+                    "type": "string",
+                    "format": "date"
                 }
             }
         },

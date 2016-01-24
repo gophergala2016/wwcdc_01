@@ -21,7 +21,7 @@ func NewGophergalaLearningResourcesAPI(spec *spec.Document) *GophergalaLearningR
 		spec:            spec,
 		handlers:        make(map[string]map[string]http.Handler),
 		formats:         strfmt.Default,
-		defaultConsumes: "application/json",
+		defaultConsumes: "multipart/form-data",
 		defaultProduces: "application/json",
 		ServerShutdown:  func() {},
 	}
@@ -51,6 +51,8 @@ type GophergalaLearningResourcesAPI struct {
 	AddScreenshotHandler AddScreenshotHandler
 	// AddUserHandler sets the operation handler for the add user operation
 	AddUserHandler AddUserHandler
+	// AuthUserHandler sets the operation handler for the auth user operation
+	AuthUserHandler AuthUserHandler
 	// DeleteLearningResourceHandler sets the operation handler for the delete learning resource operation
 	DeleteLearningResourceHandler DeleteLearningResourceHandler
 	// DeleteReviewHandler sets the operation handler for the delete review operation
@@ -67,6 +69,8 @@ type GophergalaLearningResourcesAPI struct {
 	FindReviewByIDHandler FindReviewByIDHandler
 	// FindReviewsHandler sets the operation handler for the find reviews operation
 	FindReviewsHandler FindReviewsHandler
+	// FindReviewsForLearningResourceHandler sets the operation handler for the find reviews for learning resource operation
+	FindReviewsForLearningResourceHandler FindReviewsForLearningResourceHandler
 	// FindUserByIDHandler sets the operation handler for the find user by id operation
 	FindUserByIDHandler FindUserByIDHandler
 
@@ -140,6 +144,10 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 		unregistered = append(unregistered, "AddUserHandler")
 	}
 
+	if o.AuthUserHandler == nil {
+		unregistered = append(unregistered, "AuthUserHandler")
+	}
+
 	if o.DeleteLearningResourceHandler == nil {
 		unregistered = append(unregistered, "DeleteLearningResourceHandler")
 	}
@@ -170,6 +178,10 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 
 	if o.FindReviewsHandler == nil {
 		unregistered = append(unregistered, "FindReviewsHandler")
+	}
+
+	if o.FindReviewsForLearningResourceHandler == nil {
+		unregistered = append(unregistered, "FindReviewsForLearningResourceHandler")
 	}
 
 	if o.FindUserByIDHandler == nil {
@@ -269,6 +281,11 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 	}
 	o.handlers["POST"]["/users"] = NewAddUser(o.context, o.AddUserHandler)
 
+	if o.handlers["POST"] == nil {
+		o.handlers[strings.ToUpper("POST")] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/user-auth"] = NewAuthUser(o.context, o.AuthUserHandler)
+
 	if o.handlers["DELETE"] == nil {
 		o.handlers[strings.ToUpper("DELETE")] = make(map[string]http.Handler)
 	}
@@ -308,6 +325,11 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/reviews"] = NewFindReviews(o.context, o.FindReviewsHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/learning-resources/{id}/reviews"] = NewFindReviewsForLearningResource(o.context, o.FindReviewsForLearningResourceHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)

@@ -56,6 +56,14 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		}
 		return operations.NewAddUserOK()
 	})
+	api.AuthUserHandler = operations.AuthUserHandlerFunc(func(params operations.AuthUserParams) middleware.Responder {
+		authed := db.AuthUser(params.Email, params.Password)
+		if authed {
+			return operations.NewAuthUserOK()
+		} else {
+			return operations.NewAuthUserDefault(403)
+		}
+	})
 	api.DeleteLearningResourceHandler = operations.DeleteLearningResourceHandlerFunc(func(params operations.DeleteLearningResourceParams) middleware.Responder {
 		err := db.DeleteLearningResource(params.ID)
 		if err != nil {
@@ -106,6 +114,12 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 	})
 	api.FindReviewsHandler = operations.FindReviewsHandlerFunc(func() middleware.Responder {
 		return middleware.NotImplemented("operation .FindReviews has not yet been implemented")
+	})
+	api.FindReviewsForLearningResourceHandler = operations.FindReviewsForLearningResourceHandlerFunc(func(params operations.FindReviewsForLearningResourceParams) middleware.Responder {
+     reviews, err := db.FindReviewsForLearningResource(params.ID)
+     if err != nil {
+       
+     }
 	})
 	api.FindUserByIDHandler = operations.FindUserByIDHandlerFunc(func(params operations.FindUserByIDParams) middleware.Responder {
 		return middleware.NotImplemented("operation .FindUserByID has not yet been implemented")

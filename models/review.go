@@ -54,6 +54,10 @@ type Review struct {
 	*/
 	LearningResourceID int64 `json:"learning_resource_id,omitempty"`
 
+	/* ReviewDate review date
+	 */
+	ReviewDate strfmt.Date `json:"review_date,omitempty"`
+
 	/* Usefulness usefulness
 
 	Required: true

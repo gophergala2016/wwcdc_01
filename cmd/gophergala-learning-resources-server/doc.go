@@ -1,7 +1,7 @@
 /*Package main gophergala learning resources
 Terms Of Service:
 
-https://boolmeover.com/tos
+https://boolmeover.com/tos.html
 
 
     Schemes:
