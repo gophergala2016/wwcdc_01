@@ -35,6 +35,10 @@ type LearningResource struct {
 	*/
 	Name string `json:"name,omitempty"`
 
+	/* Screenshots screenshots
+	 */
+	Screenshots []string `json:"screenshots,omitempty"`
+
 	/* Type type
 
 	Required: true
@@ -63,6 +67,11 @@ func (m *LearningResource) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateScreenshots(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -113,6 +122,23 @@ func (m *LearningResource) validateName(formats strfmt.Registry) error {
 
 	if err := validate.RequiredString("name", "body", string(m.Name)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *LearningResource) validateScreenshots(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Screenshots) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Screenshots); i++ {
+
+		if err := validate.RequiredString("screenshots"+"."+strconv.Itoa(i), "body", string(m.Screenshots[i])); err != nil {
+			return err
+		}
+
 	}
 
 	return nil

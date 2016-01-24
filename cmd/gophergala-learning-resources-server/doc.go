@@ -1,12 +1,12 @@
 /*Package main gophergala learning resources
 Terms Of Service:
 
-http://what
+https://boolmeover.com/tos
 
 
     Schemes:
       https
-    Host: mc1.massca.st:13337
+    Host: boolmeover.com
     BasePath: /
     Version: 1.0.0
     License: MIT

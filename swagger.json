@@ -4,7 +4,7 @@
         "version": "1.0.0",
         "title": "gophergala learning resources",
         "description": "",
-        "termsOfService": "http://what",
+        "termsOfService": "https://boolmeover.com/tos",
         "contact": {
             "name": "wwcdc_01"
         },
@@ -12,7 +12,7 @@
             "name": "MIT"
         }
     },
-    "host": "mc1.massca.st:13337",
+    "host": "boolmeover.com",
     "basePath": "/api",
     "schemes": [
         "https"
@@ -41,6 +41,42 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/screenshot/{id}": {
+            "post": {
+                "description": "Adds a screenshot to the learning resource id specified",
+                "operationId": "addScreenshot",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "screenshot",
+                        "in": "formData",
+                        "description": "screenshot image for the learning resource specified",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the learning resource",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success response"
                     },
                     "default": {
                         "description": "unexpected error",
@@ -511,6 +547,12 @@
                     "type": "string"
                 },
                 "languages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "screenshots": {
                     "type": "array",
                     "items": {
                         "type": "string"

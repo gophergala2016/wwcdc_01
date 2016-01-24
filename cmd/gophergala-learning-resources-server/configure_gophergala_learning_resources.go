@@ -35,12 +35,39 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		}
 		return operations.NewAddLearningResourceOK().WithPayload(params.LearningResource)
 	})
+	api.AddReviewHandler = operations.AddReviewHandlerFunc(func(params operations.AddReviewParams) middleware.Responder {
+		err := db.AddReview(params.Review)
+		if err != nil {
+			return operations.NewAddReviewDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewAddReviewOK().WithPayload(params.Review)
+	})
+	api.AddScreenshotHandler = operations.AddScreenshotHandlerFunc(func(params operations.AddScreenshotParams) middleware.Responder {
+		err := db.AddScreenshot(params.Screenshot, params.ID)
+		if err != nil {
+			return operations.NewAddScreenshotDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewAddScreenshotOK()
+	})
+	api.AddUserHandler = operations.AddUserHandlerFunc(func(params operations.AddUserParams) middleware.Responder {
+		err := db.AddUser(params.User)
+		if err != nil {
+			return operations.NewAddUserDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewAddUserOK()
+	})
 	api.DeleteLearningResourceHandler = operations.DeleteLearningResourceHandlerFunc(func(params operations.DeleteLearningResourceParams) middleware.Responder {
 		err := db.DeleteLearningResource(params.ID)
 		if err != nil {
 			return operations.NewDeleteLearningResourceDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
 		}
 		return operations.NewDeleteLearningResourceNoContent()
+	})
+	api.DeleteReviewHandler = operations.DeleteReviewHandlerFunc(func(params operations.DeleteReviewParams) middleware.Responder {
+		return middleware.NotImplemented("operation .DeleteReview has not yet been implemented")
+	})
+	api.DeleteUserHandler = operations.DeleteUserHandlerFunc(func(params operations.DeleteUserParams) middleware.Responder {
+		return middleware.NotImplemented("operation .DeleteUser has not yet been implemented")
 	})
 	api.FindLanguagesHandler = operations.FindLanguagesHandlerFunc(func() middleware.Responder {
 		langs, err := db.FindLanguages()
@@ -73,6 +100,15 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 			learningResources = append(learningResources, lr...)
 		}
 		return operations.NewFindLearningResourcesOK().WithPayload(learningResources)
+	})
+	api.FindReviewByIDHandler = operations.FindReviewByIDHandlerFunc(func(params operations.FindReviewByIDParams) middleware.Responder {
+		return middleware.NotImplemented("operation .FindReviewByID has not yet been implemented")
+	})
+	api.FindReviewsHandler = operations.FindReviewsHandlerFunc(func() middleware.Responder {
+		return middleware.NotImplemented("operation .FindReviews has not yet been implemented")
+	})
+	api.FindUserByIDHandler = operations.FindUserByIDHandlerFunc(func(params operations.FindUserByIDParams) middleware.Responder {
+		return middleware.NotImplemented("operation .FindUserByID has not yet been implemented")
 	})
 
 	api.ServerShutdown = func() {}

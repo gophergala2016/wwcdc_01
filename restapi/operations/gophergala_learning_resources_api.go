@@ -45,14 +45,30 @@ type GophergalaLearningResourcesAPI struct {
 
 	// AddLearningResourceHandler sets the operation handler for the add learning resource operation
 	AddLearningResourceHandler AddLearningResourceHandler
+	// AddReviewHandler sets the operation handler for the add review operation
+	AddReviewHandler AddReviewHandler
+	// AddScreenshotHandler sets the operation handler for the add screenshot operation
+	AddScreenshotHandler AddScreenshotHandler
+	// AddUserHandler sets the operation handler for the add user operation
+	AddUserHandler AddUserHandler
 	// DeleteLearningResourceHandler sets the operation handler for the delete learning resource operation
 	DeleteLearningResourceHandler DeleteLearningResourceHandler
+	// DeleteReviewHandler sets the operation handler for the delete review operation
+	DeleteReviewHandler DeleteReviewHandler
+	// DeleteUserHandler sets the operation handler for the delete user operation
+	DeleteUserHandler DeleteUserHandler
 	// FindLanguagesHandler sets the operation handler for the find languages operation
 	FindLanguagesHandler FindLanguagesHandler
 	// FindLearningResourceByIDHandler sets the operation handler for the find learning resource by id operation
 	FindLearningResourceByIDHandler FindLearningResourceByIDHandler
 	// FindLearningResourcesHandler sets the operation handler for the find learning resources operation
 	FindLearningResourcesHandler FindLearningResourcesHandler
+	// FindReviewByIDHandler sets the operation handler for the find review by id operation
+	FindReviewByIDHandler FindReviewByIDHandler
+	// FindReviewsHandler sets the operation handler for the find reviews operation
+	FindReviewsHandler FindReviewsHandler
+	// FindUserByIDHandler sets the operation handler for the find user by id operation
+	FindUserByIDHandler FindUserByIDHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -112,8 +128,28 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 		unregistered = append(unregistered, "AddLearningResourceHandler")
 	}
 
+	if o.AddReviewHandler == nil {
+		unregistered = append(unregistered, "AddReviewHandler")
+	}
+
+	if o.AddScreenshotHandler == nil {
+		unregistered = append(unregistered, "AddScreenshotHandler")
+	}
+
+	if o.AddUserHandler == nil {
+		unregistered = append(unregistered, "AddUserHandler")
+	}
+
 	if o.DeleteLearningResourceHandler == nil {
 		unregistered = append(unregistered, "DeleteLearningResourceHandler")
+	}
+
+	if o.DeleteReviewHandler == nil {
+		unregistered = append(unregistered, "DeleteReviewHandler")
+	}
+
+	if o.DeleteUserHandler == nil {
+		unregistered = append(unregistered, "DeleteUserHandler")
 	}
 
 	if o.FindLanguagesHandler == nil {
@@ -126,6 +162,18 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 
 	if o.FindLearningResourcesHandler == nil {
 		unregistered = append(unregistered, "FindLearningResourcesHandler")
+	}
+
+	if o.FindReviewByIDHandler == nil {
+		unregistered = append(unregistered, "FindReviewByIDHandler")
+	}
+
+	if o.FindReviewsHandler == nil {
+		unregistered = append(unregistered, "FindReviewsHandler")
+	}
+
+	if o.FindUserByIDHandler == nil {
+		unregistered = append(unregistered, "FindUserByIDHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -206,10 +254,35 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 	}
 	o.handlers["POST"]["/learning-resources"] = NewAddLearningResource(o.context, o.AddLearningResourceHandler)
 
+	if o.handlers["POST"] == nil {
+		o.handlers[strings.ToUpper("POST")] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/reviews"] = NewAddReview(o.context, o.AddReviewHandler)
+
+	if o.handlers["POST"] == nil {
+		o.handlers[strings.ToUpper("POST")] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/screenshot/{id}"] = NewAddScreenshot(o.context, o.AddScreenshotHandler)
+
+	if o.handlers["POST"] == nil {
+		o.handlers[strings.ToUpper("POST")] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/users"] = NewAddUser(o.context, o.AddUserHandler)
+
 	if o.handlers["DELETE"] == nil {
 		o.handlers[strings.ToUpper("DELETE")] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/learning-resources/{id}"] = NewDeleteLearningResource(o.context, o.DeleteLearningResourceHandler)
+
+	if o.handlers["DELETE"] == nil {
+		o.handlers[strings.ToUpper("DELETE")] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/reviews/{id}"] = NewDeleteReview(o.context, o.DeleteReviewHandler)
+
+	if o.handlers["DELETE"] == nil {
+		o.handlers[strings.ToUpper("DELETE")] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/users/{id}"] = NewDeleteUser(o.context, o.DeleteUserHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
@@ -225,6 +298,21 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/learning-resources"] = NewFindLearningResources(o.context, o.FindLearningResourcesHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/reviews/{id}"] = NewFindReviewByID(o.context, o.FindReviewByIDHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/reviews"] = NewFindReviews(o.context, o.FindReviewsHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/users/{id}"] = NewFindUserByID(o.context, o.FindUserByIDHandler)
 
 }
 

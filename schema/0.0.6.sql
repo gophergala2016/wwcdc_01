@@ -1,6 +1,6 @@
 CREATE TABLE pictures
 (
-  picture_id serial NOT NULL,
+  id serial primary key, 
   learning_resource_id integer,
   picture_url varchar(200),
   name varchar(2000)
