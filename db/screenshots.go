@@ -1,13 +1,24 @@
 package db
 
-import "github.com/gophergala2016/wwcdc_01/models"
+import (
+	"io/ioutil"
 
-func AddScreenshot(screenshot *models.Screenshot) error {
-	query := `insert into gophergala_reviews 
-    (user_id, learning_resource_id, name, picture_url)
-    values($1, $2, $3, $4)`
-	_, err := db.Exec(query, screenshot.UserID, screenshot.LearningResourceID,
-		screenshot.Name, screenshot.Url)
+	"github.com/go-contrib/uuid"
+	"github.com/gophergala2016/wwcdc_01/restapi/operations"
+)
+
+func AddScreenshot(screenshot *operations.AddScreenshotParams) error {
+	query := `insert into pictures
+    (learning_resource_id, picture_url)
+    values($1, $2)`
+	buf, err := ioutil.ReadAll(screenshot.Screenshot.Data)
+	if err != nil {
+		return err
+	}
+	u1 := uuid.NewV4()
+	ioutil.WriteFile("./public/screenshots/"+u1.String()+".png", buf, 0644)
+	url := "https://boolmeover.com/screenshots/" + u1.String() + ".png"
+	_, err = db.Exec(query, screenshot.ID, url)
 	if err != nil {
 		return err
 	}

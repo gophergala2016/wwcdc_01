@@ -43,7 +43,7 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		return operations.NewAddReviewOK().WithPayload(params.Review)
 	})
 	api.AddScreenshotHandler = operations.AddScreenshotHandlerFunc(func(params operations.AddScreenshotParams) middleware.Responder {
-		err := db.AddScreenshot(params.Screenshot, params.ID)
+		err := db.AddScreenshot(&params)
 		if err != nil {
 			return operations.NewAddScreenshotDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
 		}

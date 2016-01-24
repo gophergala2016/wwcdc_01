@@ -44,7 +44,7 @@ func (o *AddScreenshotParams) BindRequest(r *http.Request, route *middleware.Mat
 	if err := r.ParseMultipartForm(32 << 20); err != nil {
 		return err
 	}
-	fds := httpkit.Values(r.Form)
+	//fds := httpkit.Values(r.Form)
 
 	rID, rhkID, _ := route.Params.GetOK("id")
 	if err := o.bindID(rID, rhkID, route.Formats); err != nil {
