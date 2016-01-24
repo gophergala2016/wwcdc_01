@@ -14,18 +14,18 @@ export const userLogin = can.Map.extend({
   }
 });
 
-//LearningResources.List = can.List.extend({
-//  Map: LearningResources
-//}, {});
+userLogin.List = can.List.extend({
+  Map: userLogin
+}, {});
 
 export const loginConnection = superMap({
   url: '/api/user-auth',
   idProp: 'id',
-  //Map: LearningResources,
-  //List: LearningResources.List,
+  Map: userLogin,
+  List: userLogin.List,
   name: 'login'
 });
 
 tag('login-model', loginConnection);
 
-//export default LearningResources;
+export default userLogin;
