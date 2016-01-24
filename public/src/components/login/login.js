@@ -1,9 +1,9 @@
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-import './add-resource.less!';
-import template from './add-resource.stache!';
-import LearningResources from 'gophergala/models/learning-resources';
+import './login.less!';
+import template from './login.stache!';
+//import LearningResources from 'gophergala/models/learning-resources';
 
 export const ViewModel = Map.extend({
   define:{
