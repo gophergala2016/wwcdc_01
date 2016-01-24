@@ -8,4 +8,18 @@ language-selector {
   .selected-langs {
     margin-bottom: 10px;
   }
+
+  .filtered-langs {
+    display: none;
+    max-height: 200px;
+    overflow: auto;
+      a {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        &:hover {
+          background-color: #ccc;
+        }
+      }
+  }
 }
