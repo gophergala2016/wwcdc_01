@@ -4,12 +4,14 @@ const store = fixture.store([{
   "id":9,
   "name":"Geek for Geeks",
   "type":"online",
-  "url":"http://www.geeksforgeeks.org/fundamentals-of-algorithms/"
+  "url":"http://www.geeksforgeeks.org/fundamentals-of-algorithms/",
+  "languages": ["go", "js"]
 }, {
   "id":8,
   "name":"Another One",
   "type":"online",
-  "url":"http://www.geeksforgeeks.org/fundamentals-of-algorithms/"
+  "url":"http://www.geeksforgeeks.org/fundamentals-of-algorithms/",
+  "languages": ["python", "ruby", "erlang"]
 }]);
 
 fixture({
