@@ -21,3 +21,5 @@ import 'gophergala/components/create-review/create-review_test';
 import 'gophergala/pages/resource/resource_test';
 
 import 'gophergala/pages/404/404_test';
+
+import 'gophergala/components/language-selector/language-selector_test';

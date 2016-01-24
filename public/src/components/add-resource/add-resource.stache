@@ -1,3 +1,4 @@
+<can-import from="gophergala/components/language-selector/"/>
 <form ($submit)="send(%event)">
   <div class="form-group">
     <label for="name">Resource Name</label>
@@ -11,8 +12,16 @@
   </div>
   <div class="form-group">
     <label for="type">Type</label>
-    <input id="type" type="text" class="form-control" placeholder="Type"
-           {($value)}="learningResource.type"/>
+    <select class="form-control" {($value)}="learningResource.type">
+      <option value="">Select a Type</option>
+      <option value="online">Online Course</option>
+      <option value="virtual-mentor">Virtual Mentor</option>
+      <option value="open-source">Open Source</option>
+    </select>
+  </div>
+    <div class="form-group">
+    <label for="languages">Languages</label>
+    <language-selector {(learningResource.languages)}="selectedLanguages"/>
   </div>
   <div class="form-group">
     <input type="submit" class="btn btn-primary btn-block" value="Send"/>

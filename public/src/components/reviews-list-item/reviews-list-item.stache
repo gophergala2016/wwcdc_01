@@ -1,18 +1,28 @@
 <div>
-  <dl>
-    <dt>Date</dt>
-    <dd>{{review_date}}</dd>
-  </dl>
-  <dl>
-    <dt>Completed</dt>
-    <dd>{{finished}}</dd>
-  </dl>
-  <dl>
-    <dt>Course Size</dt>
-    <dd>{{course_size}}</dd>
-  </dl>
-  <dl>
-    <dt>Course Length</dt>
-    <dd>{{course_length}}</dd>
-  </dl>
+  <h5 class="list-group-item-heading page-header">
+    Posted: {{review_date}}
+  </h5>
+  <div class="list-group-item-text clearfix">
+  <p>{{description}}</p>
+  <div class="col-sm-6">
+    <dl>
+      <dt>Completed</dt>
+      <dd>{{finished}}</dd>
+      <dt>Course Size</dt>
+      <dd>{{course_size}}</dd>
+      <dt>Course Length</dt>
+      <dd>{{course_length}}</dd>
+    </dl>
+  </div>
+    <div class="col-sm-6">
+    <dl>
+      <dt>Cost</dt>
+      <dd>{{cost}}</dd>
+      <dt>Usefulness</dt>
+      <dd>{{usefulness}}/10</dd>
+      <dt>Course Interaction</dt>
+      <dd>{{course_interaction}}/10</dd>
+    </dl>
+  </div>
+  </div>
 </div>
