@@ -23,3 +23,5 @@ import 'gophergala/pages/resource/resource_test';
 import 'gophergala/pages/404/404_test';
 
 import 'gophergala/components/language-selector/language-selector_test';
+
+import 'gophergala/components/resource-detail/resource-detail_test';

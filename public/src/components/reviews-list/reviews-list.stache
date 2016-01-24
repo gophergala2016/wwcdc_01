@@ -8,7 +8,7 @@
     </div>
   {{else}}
     <div class="list-group-item">
-      <h4 class="list-group-item-heading">No learning-resourcess</h4>
+      <h4 class="list-group-item-heading">No Reviews Yet :(</h4>
     </div>
   {{/each}}
 </learning-resource-reviews-model>
