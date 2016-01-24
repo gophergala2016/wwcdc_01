@@ -1,4 +1,4 @@
 <div>
-  <h4 class="list-group-item-heading">{{resource.name}}</h4>
+  <h4 class="list-group-item-heading"><a href={{routeUrl page='resource' slug=resource.id}}>{{resource.name}}</a></h4>
   <p class="list-group-item-text">{{languages}}</p>
 </div>

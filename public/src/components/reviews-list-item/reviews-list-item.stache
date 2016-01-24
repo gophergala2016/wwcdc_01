@@ -1,1 +1,18 @@
-<p>{{message}}</p>
+<div>
+  <dl>
+    <dt>Date</dt>
+    <dd>{{review_date}}</dd>
+  </dl>
+  <dl>
+    <dt>Completed</dt>
+    <dd>{{finished}}</dd>
+  </dl>
+  <dl>
+    <dt>Course Size</dt>
+    <dd>{{course_size}}</dd>
+  </dl>
+  <dl>
+    <dt>Course Length</dt>
+    <dd>{{course_length}}</dd>
+  </dl>
+</div>
