@@ -37,10 +37,7 @@
                     "200": {
                         "description": "languages response",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                            "$ref": "#/definitions/Languages"
                         }
                     },
                     "default": {
@@ -222,7 +219,7 @@
         },
         "/learning-resources/{id}/reviews": {
             "get": {
-                "description": "Returns reviews for a particular learning resource.",
+                "description": "Returns a learning resource based on a single ID, if the user has access to the learning resource",
                 "operationId": "findReviewsForLearningResource",
                 "produces": [
                     "application/json"
@@ -610,6 +607,17 @@
                 "review_date": {
                     "type": "string",
                     "format": "date"
+                }
+            }
+        },
+        "Languages": {
+            "type": "object",
+            "properties": {
+                "languages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },

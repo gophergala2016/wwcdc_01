@@ -21,7 +21,7 @@ func NewGophergalaLearningResourcesAPI(spec *spec.Document) *GophergalaLearningR
 		spec:            spec,
 		handlers:        make(map[string]map[string]http.Handler),
 		formats:         strfmt.Default,
-		defaultConsumes: "multipart/form-data",
+		defaultConsumes: "application/json",
 		defaultProduces: "application/json",
 		ServerShutdown:  func() {},
 	}

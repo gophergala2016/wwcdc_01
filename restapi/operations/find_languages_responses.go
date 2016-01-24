@@ -18,7 +18,7 @@ swagger:response findLanguagesOK
 type FindLanguagesOK struct {
 
 	// In: body
-	Payload []string `json:"body,omitempty"`
+	Payload *models.Languages `json:"body,omitempty"`
 }
 
 // NewFindLanguagesOK creates FindLanguagesOK with default headers values
@@ -27,7 +27,7 @@ func NewFindLanguagesOK() *FindLanguagesOK {
 }
 
 // WithPayload adds the payload to the find languages o k response
-func (o *FindLanguagesOK) WithPayload(payload []string) *FindLanguagesOK {
+func (o *FindLanguagesOK) WithPayload(payload *models.Languages) *FindLanguagesOK {
 	o.Payload = payload
 	return o
 }
@@ -36,10 +36,11 @@ func (o *FindLanguagesOK) WithPayload(payload []string) *FindLanguagesOK {
 func (o *FindLanguagesOK) WriteResponse(rw http.ResponseWriter, producer httpkit.Producer) {
 
 	rw.WriteHeader(200)
-	if err := producer.Produce(rw, o.Payload); err != nil {
-		panic(err) // let the recovery middleware deal with this
+	if o.Payload != nil {
+		if err := producer.Produce(rw, o.Payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
 	}
-
 }
 
 /*FindLanguagesDefault unexpected error

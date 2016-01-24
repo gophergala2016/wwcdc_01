@@ -15,3 +15,8 @@ func AddReview(review *models.Review) error {
 	}
 	return nil
 }
+
+func FindReviewsForLearningResource(id int64) ([]*models.Review, error) {
+  reviews := []*models.Review{}
+  return reviews, nil
+}

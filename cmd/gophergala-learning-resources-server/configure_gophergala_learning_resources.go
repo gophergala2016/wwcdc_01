@@ -57,12 +57,11 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		return operations.NewAddUserOK()
 	})
 	api.AuthUserHandler = operations.AuthUserHandlerFunc(func(params operations.AuthUserParams) middleware.Responder {
-		authed := db.AuthUser(params.Email, params.Password)
+		authed := db.AuthUser(params.User.Email, params.User.Password)
 		if authed {
 			return operations.NewAuthUserOK()
-		} else {
-			return operations.NewAuthUserDefault(403)
 		}
+		return operations.NewAuthUserDefault(403)
 	})
 	api.DeleteLearningResourceHandler = operations.DeleteLearningResourceHandlerFunc(func(params operations.DeleteLearningResourceParams) middleware.Responder {
 		err := db.DeleteLearningResource(params.ID)
@@ -82,7 +81,8 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		if err != nil {
 			operations.NewFindLanguagesDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
 		}
-		return operations.NewFindLanguagesOK().WithPayload(langs)
+      ls := models.Languages{langs}
+		return operations.NewFindLanguagesOK().WithPayload(&ls)
 	})
 	api.FindLearningResourceByIDHandler = operations.FindLearningResourceByIDHandlerFunc(func(params operations.FindLearningResourceByIDParams) middleware.Responder {
 		learningResource, err := db.FindLearningResourceByID(params.ID)
@@ -116,10 +116,11 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		return middleware.NotImplemented("operation .FindReviews has not yet been implemented")
 	})
 	api.FindReviewsForLearningResourceHandler = operations.FindReviewsForLearningResourceHandlerFunc(func(params operations.FindReviewsForLearningResourceParams) middleware.Responder {
-     reviews, err := db.FindReviewsForLearningResource(params.ID)
-     if err != nil {
-       
-     }
+		reviews, err := db.FindReviewsForLearningResource(params.ID)
+		if err != nil {
+			return operations.NewFindReviewsForLearningResourceDefault(500).WithPayload(&models.ErrorModel{Code: 500, Message: err.Error()})
+		}
+		return operations.NewFindReviewsForLearningResourceOK().WithPayload(reviews)
 	})
 	api.FindUserByIDHandler = operations.FindUserByIDHandlerFunc(func(params operations.FindUserByIDParams) middleware.Responder {
 		return middleware.NotImplemented("operation .FindUserByID has not yet been implemented")
