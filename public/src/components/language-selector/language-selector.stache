@@ -1,0 +1,11 @@
+<div class="selected-langs">
+  {{#each selectedLanguages}}
+    <div class="label label-default">{{.}} <a href="#" ($click)="{removeSelectedLanguage}">&times;</a></div>
+  {{/each}}
+</div>
+{{#if getLangs.isResolved}}
+    <input type="text" class="type-ahead form-control" {(value)}="{query}"/>
+   {{#each filteredLanguages}}
+    {{.}}
+   {{/each}}
+{{/if}}

@@ -13,7 +13,7 @@
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <h1 class="page-header text-center">
-            Learn to Program!
+            Boolmeover.com
           </h1>
           <ul class="nav nav-pills">
             <li role="presentation" class="{{#eq page 'home'}}active{{/eq}}">

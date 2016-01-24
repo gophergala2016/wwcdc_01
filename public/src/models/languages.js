@@ -1,24 +1,10 @@
 import can from 'can';
-import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 
-export const Languages = can.Map.extend({
-  define: {}
-});
+import Model from "can-connect/can/model/";
 
-Languages.List = can.List.extend({
-  Map: Languages
-}, {});
-
-export const languagesConnection = superMap({
-  url: 'api/languages',
-  idProp: 'id',
-  Map: Languages,
-  List: Languages.List,
-  name: 'languages'
-});
-
-tag('languages-model', languagesConnection);
+let Languages = Model.extend({
+  findOne: "/api/languages"
+},{});
 
 export default Languages;

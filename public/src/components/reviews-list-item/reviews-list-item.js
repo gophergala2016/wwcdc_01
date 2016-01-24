@@ -6,8 +6,14 @@ import template from './reviews-list-item.stache!';
 
 export const ViewModel = Map.extend({
   define: {
-    message: {
-      value: 'This is the reviews-list-item component'
+    cost: {
+      type: 'number',
+      get(setVal) {
+        if (setVal) {
+          return '$'+ setVal.toFixed(2);
+        }
+        return 'no cost';
+      }
     }
   }
 });
