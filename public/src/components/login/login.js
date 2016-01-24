@@ -7,9 +7,10 @@ import template from './login.stache!';
 
 export const ViewModel = Map.extend({
   define:{
-    userLogin: {
-      value: {},
-      Type: LearningResources
+    message: {
+  //    value: {},
+  //    Type: LearningResources
+      
     }
   },
 /*  send(event) {
@@ -21,9 +22,9 @@ export const ViewModel = Map.extend({
       this.resetValues()
     });
   }, */
-  resetValues() {
-    this.attr('userLogin', {});
-  }
+//  resetValues() {
+//    this.attr('userLogin', {});
+//  }
 });
 
 export default Component.extend({
