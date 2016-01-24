@@ -19,7 +19,8 @@
     ],
     "consumes": [
         "application/json",
-        "application/octet-stream"
+        "application/octet-stream",
+        "multipart/form-data"
     ],
     "produces": [
         "application/json"

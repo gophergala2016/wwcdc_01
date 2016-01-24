@@ -35,12 +35,17 @@ func FindLearningResources(t string) ([]*models.LearningResource, error) {
 			fmt.Println(err)
 		}
 	}
-	query = `select l.name as name
+	for _, x := range ret {
+		query = `select l.name as name
             from gophergala_languages l, 
                  gophergala_learning_resource_languages lrl
             where l.id = lrl.language_id and lrl.learning_resource_id = $1`
-	for _, x := range ret {
 		err = tx.Select(&(x.Languages), query, x.ID)
+		if err != nil {
+			fmt.Println(err)
+		}
+		query = `select picture_url from pictures where learning_resource_id=$1`
+		err = tx.Select(&(x.Screenshots), query, x.ID)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -63,6 +68,14 @@ func FindLearningResourceByID(id int64) (*models.LearningResource, error) {
                  gophergala_learning_resource_languages lrl
             where l.id = lrl.language_id and lrl.learning_resource_id = $1`
 	err = db.Select(&ret.Languages, query, id)
+	if err != nil {
+		fmt.Println(err)
+	}
+	query = `select picture_url from pictures where learning_resource_id=$1`
+	err = db.Select(&ret.Screenshots, query, id)
+	if err != nil {
+		fmt.Println(err)
+	}
 	return &ret, nil
 }
 
@@ -143,11 +156,16 @@ func DeleteLearningResource(id int64) error {
 	if err != nil {
 		return err
 	}
+	query = "delete from pictures where learning_resource_id=$1"
+	_, err = tx.Exec(query, id)
+	if err != nil {
+		return err
+	}
 	query = "delete from gophergala_learning_resource_languages where learning_resource_id=$1"
 	_, err = tx.Exec(query, id)
 	if err != nil {
 		return err
 	}
 	tx.Commit()
-   return nil
+	return nil
 }

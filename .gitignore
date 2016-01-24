@@ -1,4 +1,5 @@
 service.log
 public/node_modules
+public/screenshots
 *.swp
 public/swagger.json
