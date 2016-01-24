@@ -21,6 +21,9 @@
             <li role="presentation" class="{{#eq page 'add-to-list'}}active{{/eq}}">
               <a href="{{routeUrl page='add-to-list' }}">Add to list</a>
             </li>
+            <li role="presentation" class="{{#eq page 'login'}}active{{/eq}}">
+              <a href="{{routeUrl page='login' }}">Login/Register</a>
+            </li>
           </ul>
           {{#switch page}}
             {{#case "add-to-list"}}
