@@ -10,7 +10,7 @@ export const ViewModel = Map.extend({
     message: {
   //    value: {},
   //    Type: LearningResources
-      
+      value: 'This is the login component'
     }
   },
 /*  send(event) {
