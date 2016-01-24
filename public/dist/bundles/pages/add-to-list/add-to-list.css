@@ -3,4 +3,4 @@ pages-add-to-list{display:block}
 /*gophergala@0.0.0#components/add-resource/add-resource.less!$less*/
 add-resource{display:block}
 /*gophergala@0.0.0#components/language-selector/language-selector.less!$less*/
-language-selector{display:block}language-selector .label a{color:#fff;padding-left:10px;text-decoration:none}language-selector .selected-langs{margin-bottom:10px}
+language-selector{display:block}language-selector .label a{color:#fff;padding-left:10px;text-decoration:none}language-selector .selected-langs{margin-bottom:10px}language-selector .filtered-langs{display:none;max-height:200px;overflow:auto}language-selector .filtered-langs a{display:block;padding:10px;border-bottom:1px solid #eee}language-selector .filtered-langs a:hover{background-color:#ccc}

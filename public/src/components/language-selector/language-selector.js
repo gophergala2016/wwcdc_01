@@ -22,11 +22,7 @@ export const ViewModel = Map.extend({
       }
     },
     query: {
-      value: '',
-      set(val, setter) {
-        setter(val);
-        this.attr('filteredLanguages');
-      }
+      value: ''
     },
     filteredLanguages: {
       value: [],
@@ -35,8 +31,8 @@ export const ViewModel = Map.extend({
         let matches = []
         let substringRegex = new RegExp(query, 'i');
         if(query) {
-          this.attr('languages').each(strs, function(i, str) {
-            if (substrRegex.test(str)) {
+          this.attr('languages').each((str)=>{
+            if (substringRegex.test(str)) {
               matches.push(str);
             }
           });
@@ -55,15 +51,39 @@ export const ViewModel = Map.extend({
   },
   selectLanguage(lang, a, ev) {
     ev.preventDefault();
-    if(!this.attr('selectedLanguages').indexOf(lang)) {
+    ev.stopPropagation();
+    if(this.attr('selectedLanguages').indexOf(lang) == -1) {
       this.attr('selectedLanguages').push(lang);
     }
     this.attr('query', '');
+  },
+  setQuery(map, el) {
+    this.attr('query', el.val());
+  },
+  newEntry(map, el, ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.attr('selectedLanguages').push(el.val());
+    el.val('');
   }
 });
+
+let clickHandler = function () {
+   $('.filtered-langs').css('display', 'none');
+}
 
 export default Component.extend({
   tag: 'language-selector',
   viewModel: ViewModel,
-  template
+  template,
+  events: {
+    'input.type-ahead click': function (el, ev) {
+      ev.stopPropagation();
+      $('.filtered-langs').css('display', 'block');
+      $('body').click(clickHandler);
+    },
+    'removed': function  (argument) {
+      $('body').off(clickHandler);
+    }
+  }
 });

@@ -4,8 +4,10 @@
   {{/each}}
 </div>
 {{#if getLangs.isResolved}}
-    <input type="text" class="type-ahead form-control" {(value)}="{query}"/>
-   {{#each filteredLanguages}}
-    {{.}}
-   {{/each}}
+    <input type="text" class="type-ahead form-control" {value}="query" ($keyup)="{setQuery}" ($enter)="{newEntry}"/>
+    <div class="filtered-langs">
+     {{#each filteredLanguages}}
+        <a href="#" ($click)="{selectLanguage}">{{.}}</a>
+     {{/each}}
+   <div class="filtered-langs">
 {{/if}}
