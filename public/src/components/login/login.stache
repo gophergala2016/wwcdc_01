@@ -1,8 +1,8 @@
 <form ($submit)="send(%event)">
   <div class="form-group">
-    <label for="username">Username</label>
-    <input id="username" type="text" class="form-control" placeholder="Username"
-           {($value)}="login.username"/>
+    <label for="email">E-mail</label>
+    <input id="email" type="text" class="form-control" placeholder="E-mail"
+           {($value)}="login.email"/>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
