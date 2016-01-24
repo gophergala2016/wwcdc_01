@@ -5,7 +5,7 @@ import 'can/map/define/define';
 
 export const userLogin = can.Map.extend({
   define: {
-    username: {
+    email: {
       type: 'string'
     },
     password: {
