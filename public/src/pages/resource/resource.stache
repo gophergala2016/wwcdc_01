@@ -1,11 +1,12 @@
 <can-import from="gophergala/models/learning-resources" />
-<can-import from="gophergala/components/resource-list-item/" />
+<can-import from="gophergala/components/resource-detail/" />
 <can-import from="gophergala/components/reviews-list/" />
 
 <learning-resources-model get="{id=resourceId}" class="list-group">
   {{#if ./isResolved}}
     <!-- TODO: REPLACE WITH RESOURCE DETAIL COMPONENT -->
-    <resource-list-item resource="{value}" />
+    <resource-detail resource="{value}" />
+    <h3 class="page-header">Reviews</h3>
     <reviews-list resourceId="{value.id}" class="list-group"/>
   {{else}}
       <h4 class="list-group-item-heading">No Resources With ID: {resourceID}</h4>

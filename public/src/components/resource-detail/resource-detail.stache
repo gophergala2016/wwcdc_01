@@ -1,0 +1,10 @@
+<h2 class="page-header">{{resource.name}} <small>{{resource.type}}</small></h2>
+<p class="lead"><a href="{{resource.url}}" target="_blank"><span class="glyphicon glyphicon-link"></span> Visit Site</a></p>
+<div>
+  <p>
+    <strong>Languages/Topics: </strong>
+    {{#each resource.languages}}
+      <span class="label label-info">{{.}}</span>
+    {{/each}}
+  </p>
+</div>
