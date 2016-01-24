@@ -1,20 +1,18 @@
 <form ($submit)="send(%event)">
   <div class="form-group">
-    <label for="name">Resource Name</label>
-    <input id="name" type="text" class="form-control" placeholder="Resource Name"
-           {($value)}="learningResource.name"/>
+    <label for="username">Username</label>
+    <input id="username" type="text" class="form-control" placeholder="Username"
+           {($value)}="login.username"/>
   </div>
   <div class="form-group">
-    <label for="url">URL</label>
-    <input id="url" type="text" class="form-control" placeholder="URL"
-           {($value)}="learningResource.url"/>
+    <label for="password">Password</label>
+    <input id="password" type="text" class="form-control" placeholder="Password"
+           {($value)}="login.password"/>
   </div>
   <div class="form-group">
-    <label for="type">Type</label>
-    <input id="type" type="text" class="form-control" placeholder="Type"
-           {($value)}="learningResource.url"/>
+    <input type="submit" class="btn btn-primary btn-block" value="Register"/>
   </div>
   <div class="form-group">
-    <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+    <input type="submit" class="btn btn-primary btn-block" value="Login"/>
   </div>
 </form>
