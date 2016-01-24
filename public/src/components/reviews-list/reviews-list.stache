@@ -1,1 +1,14 @@
-<p>{{message}}</p>
+<can-import from="gophergala/models/learning-resource-reviews" />
+<can-import from="gophergala/components/reviews-list-item/" />
+
+<learning-resource-reviews-model get-list="{resourceId=resourceId}" class="list-group">
+  {{#each ./value}}
+    <div class="list-group-item clearfix">
+        <reviews-list-item review="{.}" />
+    </div>
+  {{else}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">No learning-resourcess</h4>
+    </div>
+  {{/each}}
+</learning-resource-reviews-model>
