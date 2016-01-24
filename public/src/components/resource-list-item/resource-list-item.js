@@ -3,11 +3,18 @@ import Map from 'can/map/';
 import 'can/map/define/';
 import './resource-list-item.less!';
 import template from './resource-list-item.stache!';
+import LearningResources from 'gophergala/models/learning-resources';
 
 export const ViewModel = Map.extend({
   define: {
-    message: {
-      value: 'This is the resource-list-item component'
+    resource: {
+      value: {},
+      Type: LearningResources
+    },
+    languages: {
+      get(){
+        return this.resource.attr('languages').join(', ') || '';
+      }
     }
   }
 });
