@@ -60,7 +60,7 @@
                   {{#if isPending}}
                     Loading...
                   {{else}}
-                    <pages-resource id="slug"/>
+                    <pages-resource resource-id="{slug}"/>
                   {{/if}}
                 </can-import>
               {{else}}
