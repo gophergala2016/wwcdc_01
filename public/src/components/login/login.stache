@@ -1,0 +1,20 @@
+<form ($submit)="send(%event)">
+  <div class="form-group">
+    <label for="name">Resource Name</label>
+    <input id="name" type="text" class="form-control" placeholder="Resource Name"
+           {($value)}="learningResource.name"/>
+  </div>
+  <div class="form-group">
+    <label for="url">URL</label>
+    <input id="url" type="text" class="form-control" placeholder="URL"
+           {($value)}="learningResource.url"/>
+  </div>
+  <div class="form-group">
+    <label for="type">Type</label>
+    <input id="type" type="text" class="form-control" placeholder="Type"
+           {($value)}="learningResource.url"/>
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+  </div>
+</form>
