@@ -35,6 +35,15 @@
                 {{/if}}
               </can-import>
             {{/case}}
+            {{#case "login"}}
+              <can-import from="gophergala/pages/login/">
+                {{#if isPending}}
+                  Loading...
+                {{else}}
+                  <pages-login/>
+                {{/if}}
+              </can-import>
+            {{/case}}
             {{#default}}
              <can-import from="gophergala/pages/home/">
                 {{#if isPending}}
