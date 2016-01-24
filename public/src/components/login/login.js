@@ -7,12 +7,12 @@ import template from './login.stache!';
 
 export const ViewModel = Map.extend({
   define:{
-    learningResource: {
+    userLogin: {
       value: {},
       Type: LearningResources
     }
   },
-  send(event) {
+/*  send(event) {
     event.preventDefault();
     let resource = this.attr('learningResource').attr();
     console.log(resource)
@@ -20,15 +20,14 @@ export const ViewModel = Map.extend({
       console.log('hellooo')
       this.resetValues()
     });
-  },
+  }, */
   resetValues() {
-    this.attr('learningResource', {});
+    this.attr('userLogin', {});
   }
 });
 
-
 export default Component.extend({
-  tag: 'add-resource',
+  tag: 'login',
   viewModel: ViewModel,
   template
 });
