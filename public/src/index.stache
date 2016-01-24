@@ -8,6 +8,7 @@
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="gophergala/styles.less!" />
     <can-import from="gophergala/app" export-as="viewModel" />
+    <can-import from="gophergala/pages/404/"/>
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
@@ -44,14 +45,30 @@
                 {{/if}}
               </can-import>
             {{/case}}
-            {{#default}}
-             <can-import from="gophergala/pages/home/">
+            {{#case "home"}}
+              <can-import from="gophergala/pages/home/">
                 {{#if isPending}}
                   Loading...
                 {{else}}
                   <pages-home/>
                 {{/if}}
               </can-import>
+            {{/case}}
+            {{#case "resource"}}
+              {{#if slug}}
+                <can-import from="gophergala/pages/resource/">
+                  {{#if isPending}}
+                    Loading...
+                  {{else}}
+                    <pages-resource resource-id="{slug}"/>
+                  {{/if}}
+                </can-import>
+              {{else}}
+                <pages-404/>
+              {{/if}}
+            {{/case}}
+            {{#default}}
+                <pages-404/>
             {{/default}}
           {{/switch}}
 
