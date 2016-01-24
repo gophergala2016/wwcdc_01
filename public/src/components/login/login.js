@@ -13,7 +13,7 @@ export const ViewModel = Map.extend({
       Type: userLogin
     }
   },
-  send(event) {
+ /* send(event) {
     event.preventDefault();
     let user = this.attr('userLogin').attr();
     console.log(user)
@@ -21,7 +21,7 @@ export const ViewModel = Map.extend({
       console.log('login hellooo')
       this.resetValues()
     });
-  }, 
+  }, */
   resetValues() {
     this.attr('userLogin', {});
   }
