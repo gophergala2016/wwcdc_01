@@ -17,7 +17,6 @@ export const ViewModel = Map.extend({
       get() {
         return Languages.findOne({}).then((response)=>{
           this.attr('languages', response.languages.attr());
-          this.attr('selectedLanguages', response.languages.attr());
         });
       }
     },
