@@ -10,7 +10,11 @@ https://boolmeover.com/docs/#/default
 
 boolmeover.com is a site to research and review technical learning resources at a high level rather than at the individual course level. At Women Who Code DC, many people are looking for resources like this as they start off or want to polish their skills, and there aren't many places that cover broad high-level learning resource reviews.
 
-## Technology used
+## Technology/libraries used
 
-* goswagger
+* goswagger / swagger / swagger-ui
 * donejs
+* bootstrap
+* postgresql / pgx
+* jmoiron/sqlx
+* neo4j / cq
