@@ -65,6 +65,8 @@ type GophergalaLearningResourcesAPI struct {
 	FindLearningResourceByIDHandler FindLearningResourceByIDHandler
 	// FindLearningResourcesHandler sets the operation handler for the find learning resources operation
 	FindLearningResourcesHandler FindLearningResourcesHandler
+	// FindRecommendationForLearningResourceHandler sets the operation handler for the find recommendation for learning resource operation
+	FindRecommendationForLearningResourceHandler FindRecommendationForLearningResourceHandler
 	// FindReviewByIDHandler sets the operation handler for the find review by id operation
 	FindReviewByIDHandler FindReviewByIDHandler
 	// FindReviewsHandler sets the operation handler for the find reviews operation
@@ -170,6 +172,10 @@ func (o *GophergalaLearningResourcesAPI) Validate() error {
 
 	if o.FindLearningResourcesHandler == nil {
 		unregistered = append(unregistered, "FindLearningResourcesHandler")
+	}
+
+	if o.FindRecommendationForLearningResourceHandler == nil {
+		unregistered = append(unregistered, "FindRecommendationForLearningResourceHandler")
 	}
 
 	if o.FindReviewByIDHandler == nil {
@@ -315,6 +321,11 @@ func (o *GophergalaLearningResourcesAPI) initHandlerCache() {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/learning-resources"] = NewFindLearningResources(o.context, o.FindLearningResourcesHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/learning-resources/{id}/recommendations"] = NewFindRecommendationForLearningResource(o.context, o.FindRecommendationForLearningResourceHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)

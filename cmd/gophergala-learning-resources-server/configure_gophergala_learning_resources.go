@@ -122,6 +122,9 @@ func configureAPI(api *operations.GophergalaLearningResourcesAPI) http.Handler {
 		}
 		return operations.NewFindReviewsForLearningResourceOK().WithPayload(reviews)
 	})
+	api.FindRecommendationForLearningResourceHandler = operations.FindRecommendationForLearningResourceHandlerFunc(func(params operations.FindRecommendationForLearningResourceParams) middleware.Responder {
+		return middleware.NotImplemented("operation .FindRecommendationForLearningResource has not yet been implemented")
+	})
 	api.FindUserByIDHandler = operations.FindUserByIDHandlerFunc(func(params operations.FindUserByIDParams) middleware.Responder {
 		return middleware.NotImplemented("operation .FindUserByID has not yet been implemented")
 	})
