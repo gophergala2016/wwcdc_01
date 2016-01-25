@@ -1,5 +1,5 @@
 # Well, Bool me over!
-![Logo](https://raw.githubusercontent.com/gophergala2016/wwcdc_01/master/public/images/boolMEover.jpg  =250x250)
+<img src='https://raw.githubusercontent.com/gophergala2016/wwcdc_01/master/public/images/boolMEover.jpg' width="250px"/>
 
 website: 
 https://boolmeover.com/ 
