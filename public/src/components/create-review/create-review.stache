@@ -1,3 +1,4 @@
+{{^if created}}
 <h4 class="page-header">Add a Review</h4>
 <form ($submit)="send(%event)">
   <div class="form-group">
@@ -9,3 +10,8 @@
     <input type="submit" class="btn btn-primary btn-block{{#if saving}} disabled{{/if}}" value="{{#if saving}}Saving...{{else}}Send{{/if}}"/>
   </div>
 </form>
+{{else}}
+<div class="jumbotron text-center">
+  <h3>Review Sent :)<br><small>Thanks for contributing!</small></h3>
+</div>
+{{/if}}

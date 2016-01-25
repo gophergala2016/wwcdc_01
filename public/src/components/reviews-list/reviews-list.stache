@@ -13,4 +13,4 @@
     </div>
   {{/each}}
 </learning-resource-reviews-model>
-<create-review resource-id={resourceId}/>
+<create-review resource-id={resourceId} ({created})="created"/>
