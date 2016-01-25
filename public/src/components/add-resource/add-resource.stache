@@ -24,6 +24,6 @@
     <language-selector {(learningResource.languages)}="selectedLanguages"/>
   </div>
   <div class="form-group">
-    <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+    <input type="submit" class="btn btn-primary btn-block{{#if saving}} disabled{{/if}}" value="{{#if saving}}Saving...{{else}}Send{{/if}}"/>
   </div>
 </form>
