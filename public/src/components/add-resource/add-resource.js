@@ -10,15 +10,19 @@ export const ViewModel = Map.extend({
     learningResource: {
       value: {},
       Type: LearningResources
+    },
+    saving: {
+      value: false,
+      type:'boolean'
     }
   },
   send(event) {
     event.preventDefault();
     let resource = this.attr('learningResource').attr();
-    console.log(resource)
+    this.attr('saving', true);
     new LearningResources(resource).save().then(() => {
-      console.log('hellooo')
-      this.resetValues()
+      this.resetValues();
+      this.attr('saving', false);
     });
   },
   resetValues() {

@@ -1,5 +1,6 @@
 <can-import from="gophergala/models/learning-resource-reviews" />
 <can-import from="gophergala/components/reviews-list-item/" />
+<can-import from="gophergala/components/create-review/" />
 
 <learning-resource-reviews-model get-list="{resourceId=resourceId}" class="list-group">
   {{#each ./value}}
@@ -12,3 +13,4 @@
     </div>
   {{/each}}
 </learning-resource-reviews-model>
+<create-review resource-id={resourceId}/>
