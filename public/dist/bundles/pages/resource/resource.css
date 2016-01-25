@@ -7,4 +7,4 @@ reviews-list{display:block}
 /*gophergala@0.0.0#components/reviews-list-item/reviews-list-item.less!$less*/
 reviews-list-item{display:block}
 /*gophergala@0.0.0#components/create-review/create-review.less!$less*/
-create-review{display:block}
+create-review{display:block}create-review .jumbotron{margin-top:20px}

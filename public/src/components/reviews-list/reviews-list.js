@@ -8,6 +8,9 @@ export const ViewModel = Map.extend({
   define: {
     message: {
       value: 'This is the reviews-list component'
+    },
+    created: {
+      value: 0,
     }
   }
 });
